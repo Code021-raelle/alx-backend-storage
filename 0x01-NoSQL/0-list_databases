@@ -1,2 +1,2 @@
-// Script to list database
-db.adminCommand('listDatabases')
+// Script to list databases in MongoDB
+show dbs;
