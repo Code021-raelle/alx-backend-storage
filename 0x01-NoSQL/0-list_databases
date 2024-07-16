@@ -1,0 +1,2 @@
+// Script to list database
+db.adminCommand('listDatabases')
