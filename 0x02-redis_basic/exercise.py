@@ -49,7 +49,7 @@ class Cache:
         key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
-    
+
     def get(self,
             key: str,
             fn: Optional[Callable] = None,
@@ -70,7 +70,7 @@ class Cache:
         if fn is not None:
             return fn(data)
         return data
-    
+
     def get_str(self, key: str) -> Optional[str]:
         """
         Retrive the string data stored in Redis by the given key
@@ -82,7 +82,7 @@ class Cache:
             Optional[str]: The string data stored under the key
         """
         return self.get(key, lambda d: d.decode("utf-8"))
-    
+
     def get_int(self, key: str) -> Optional[int]:
         """
         Retrive the integer data stored in Redis by the given key
@@ -94,3 +94,14 @@ class Cache:
             Optional[int]: The integer data stored under the key
         """
         return self.get(key, lambda d: int(d))
+
+
+if __name__ == "__main__":
+    cache = Cache()
+
+    cache.store(b"first")
+    print(cache.get(cache.store.__qualname__))
+
+    cache.store(b"second")
+    cache.store(b"third")
+    print(cache.get(cache.store.__qualname__))
